@@ -42,11 +42,11 @@ export const StartScreen: React.FC<Props> = ({landscape}) => {
     >
 
       <div className={`h-full flex ${!landscape ? 'flex-col w-full' : 'flex-row-reverse w-2/3'} justify-center items-center`}>
-        <animated.img src="/assets/images/Me.png" alt="Petter Skogh as a 3D character" className="w-5/6" style={{...styleFadeIn}}></animated.img>
+        <animated.img src="/assets/images/Me.png" alt="Petter Skogh as a 3D character" className={`${landscape ? 'w-4/6' : 'w-5/6'}`} style={{...styleFadeIn}}></animated.img>
         <animated.div className="flex flex-col items-center" style={{...styleFadeIn}}>
-          <div className="font-raleway font-bold text-6xl text-pwhite mb-4 md:text-7xl">
+          <div className={`font-raleway font-bold ${landscape ? 'text-7xl' : 'text-6xl'} text-pwhite mb-4`}>
             <animated.h1 className="font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-pwhite via-pwhite" style={{...styleFromLeft}}>SKOGH</animated.h1>
-            <animated.h1 className="-mt-5 ml-16" style={{...styleFromRight}}>PETTER</animated.h1>
+            <animated.h1 className="-mt-7 ml-16" style={{...styleFromRight}}>PETTER</animated.h1>
           </div>
           <p className="text-pwhite px-10 text-center text-xl">Front end developer with a passion for innovation</p>
         </animated.div>

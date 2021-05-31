@@ -12,7 +12,7 @@ export const ContactClipboard = ({children}) => {
   })
 
   const styleColorIn = useSpring({
-    backgroundColor: `rgba(0, 150, 215, ${copied ? 0.5 : 0})`
+    backgroundColor: `rgba(0, 175, 225, ${copied ? 0.5 : 0})`
   })
 
   const styleFadeIn = useSpring({

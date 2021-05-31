@@ -23,7 +23,7 @@ module.exports = {
 
       },
       boxShadow: {
-        l: '-10px 0px 10px 0px rgba(0, 0, 0, 0.1)'
+        l: '-5px 0px 10px 0px rgba(0, 0, 0, 0.1)'
       }
     },
 
