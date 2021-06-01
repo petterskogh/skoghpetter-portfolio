@@ -14,12 +14,17 @@ const Home = () => {
   const size = useWindowSize();
   const [landscape, setLandscape] = useState<boolean>(false);
   const [mobileVersion, setMobileVersion] = useState<boolean>(false);
+  const [scroll, setScroll] = useState<number>(0);
 
   const sizeAnim = useSpring({
     width: mobileVersion ? 380 : size.width, 
     height: mobileVersion ? '85%' : '100%',
   })
   
+  const styleMobileViewBackground = useSpring({
+    backgroundImage: `linear-gradient(to bottom right, ${mobileVersion ? '#1d9732' :  '#6d28d9'}, ${mobileVersion ? '#25dd69' :  '#b45309'})`,
+  })
+
   useEffect(() => {
     if(width > 768){
       setLandscape(true);
@@ -38,21 +43,37 @@ const Home = () => {
     setMobileVersion(!mobileVersion)
   }
 
+  const handleScroll = (event: React.WheelEvent<HTMLDivElement>) => {
+    let newScroll = scroll - event.deltaY;
+    const upperEdge = -(window.innerHeight) - 200;
+    if(newScroll > 0){
+      newScroll = 0;
+    } else if(newScroll < upperEdge) {
+      newScroll = upperEdge;
+    }
+
+    setScroll(newScroll);
+  }
+
   return (
     <>
       <div className="h-full w-full flex justify-center items-center bg-gradient-to-br from-purple-700 to-yellow-700">
         <animated.div className={`relative overflow-hidden shadow-lg ${mobileVersion ? 'rounded-3xl' : 'rounded-none'}`}
           style={{...sizeAnim}}
           ref={ref}
+          onWheel={event => handleScroll(event)}
         >
-          <StartScreen landscape={landscape} />
+          <StartScreen landscape={landscape} scroll={scroll} setScroll={setScroll} />
           <Contact landscape={landscape} />
         </animated.div>
         {size.width > 768 ? 
-          <div className="fixed top-4 right-4 text-pwhite flex items-center"> 
+          <animated.div className="fixed top-4 right-4 text-pwhite flex items-center px-6 py-4 rounded-full" 
+            //style={{backgroundColor: 'rgba(0, 0, 0, .15)', backdropFilter: 'blur(5px)'}}
+            style={{...styleMobileViewBackground}}
+          > 
             <p className="mr-3">Mobile view:</p>
-            <SliderButton onClick={handleSliderClick} />
-          </div>
+            <SliderButton onClick={handleSliderClick} value={mobileVersion} />
+          </animated.div>
         : null}
         
         

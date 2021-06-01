@@ -4,10 +4,11 @@ import { useGesture, useDrag } from 'react-use-gesture'
 
 type Props = {
   landscape: boolean
+  scroll: number
+  setScroll: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const StartScreen: React.FC<Props> = ({landscape}) => {
-
+export const StartScreen: React.FC<Props> = ({landscape, scroll, setScroll}) => {
 
   const styleFadeIn = useSpring({ from: {opacity: 0}, to: {opacity: 1}, config: { duration: 500 }  })
   const styleFromLeft = useSpring({from: { marginLeft: '-100vw' }, to: { marginLeft: '0' }})
@@ -20,9 +21,7 @@ export const StartScreen: React.FC<Props> = ({landscape}) => {
   })
 
   const [{ y }, apiY] = useSpring(() => ({ y: 0 }))
-  const [{borderRadius}, apiBR] = useSpring(() => ({borderRadius: 0, config: {duration: 1000}}))
-
-
+  const [{borderRadius}, apiBR] = useSpring(() => ({borderRadius: 0}))
 
   // Set the drag hook and define component movement based on gesture data
   const bind = useDrag(({ down, movement: [xDelta, yDelta], velocity }) => {
@@ -32,8 +31,17 @@ export const StartScreen: React.FC<Props> = ({landscape}) => {
       dropPosition = -(window.innerHeight) - 200;
     }
     apiY.start({y: down && yDelta < 0 ? yDelta : dropPosition});
-    apiBR.start({borderRadius: down && yDelta < 0 ? 40 : 0})
+    apiBR.start({borderRadius: (down && yDelta < 0) ? 40 : 0});
   })
+
+  useEffect(() => {
+    apiY.start({y: scroll}) 
+    apiBR.start({borderRadius: scroll < 0 ? 40 : 0});
+  }, [scroll])
+
+  const scrollAway = () => {
+    setScroll((-(window.innerHeight) - 200))
+  }
   
   return (
     <animated.div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden shadow-2xl bg-gradient-to-b from-pgreen-light to-pgreen flex flex-col justify-center items-center"
@@ -42,7 +50,7 @@ export const StartScreen: React.FC<Props> = ({landscape}) => {
     >
 
       <div className={`h-full flex ${!landscape ? 'flex-col w-full' : 'flex-row-reverse w-2/3'} justify-center items-center`}>
-        <animated.img src="/assets/images/Me.png" alt="Petter Skogh as a 3D character" className={`${landscape ? 'w-4/6' : 'w-5/6'}`} style={{...styleFadeIn}}></animated.img>
+        <animated.img src="/assets/images/Me.png" alt="Petter Skogh as a 3D character" className={`${landscape ? 'w-3/6' : 'w-5/6'}`} style={{...styleFadeIn}}></animated.img>
         <animated.div className="flex flex-col items-center" style={{...styleFadeIn}}>
           <div className={`font-raleway font-bold ${landscape ? 'text-7xl' : 'text-6xl'} text-pwhite mb-4`}>
             <animated.h1 className="font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-pwhite via-pwhite" style={{...styleFromLeft}}>SKOGH</animated.h1>
@@ -53,7 +61,7 @@ export const StartScreen: React.FC<Props> = ({landscape}) => {
       </div>
 
       <div className="absolute bottom-2">
-        <animated.svg className="h-12" style={{...styleFadeIn, ...styleFadeInAndOut}} viewBox="0 0 29 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <animated.svg className="h-12 cursor-pointer" onClick={scrollAway} style={{...styleFadeIn, ...styleFadeInAndOut}} viewBox="0 0 29 39" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0)" filter="url(#filter0_d)">
           <path d="M22.9583 23.25V16.5L14.5 24L6.04166 16.5V23.25L14.5 30.75L22.9583 23.25Z" fill="#E6E8E6"/>
           <path d="M22.9583 12.75V6L14.5 13.5L6.04166 6V12.75L14.5 20.25L22.9583 12.75Z" fill="#E6E8E6"/>
