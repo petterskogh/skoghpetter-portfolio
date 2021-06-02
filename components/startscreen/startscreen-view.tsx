@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useSpring, animated} from 'react-spring';
-import { useGesture, useDrag } from 'react-use-gesture'
+import { useDrag } from 'react-use-gesture'
 
 type Props = {
   landscape: boolean
@@ -27,7 +27,6 @@ export const StartScreen: React.FC<Props> = ({landscape, scroll, setScroll}) => 
   const bind = useDrag(({ down, movement: [xDelta, yDelta], velocity }) => {
     let dropPosition = 0;
     if(!down && velocity > 0.2 && yDelta < 0) {
-      console.log("Should throw out")
       dropPosition = -(window.innerHeight) - 200;
     }
     apiY.start({y: down && yDelta < 0 ? yDelta : dropPosition});
@@ -60,7 +59,7 @@ export const StartScreen: React.FC<Props> = ({landscape, scroll, setScroll}) => 
         </animated.div>
       </div>
 
-      <div className="absolute bottom-2">
+      <div className="absolute bottom-2 flex flex-col text-pwhite">
         <animated.svg className="h-12 cursor-pointer" onClick={scrollAway} style={{...styleFadeIn, ...styleFadeInAndOut}} viewBox="0 0 29 39" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0)" filter="url(#filter0_d)">
           <path d="M22.9583 23.25V16.5L14.5 24L6.04166 16.5V23.25L14.5 30.75L22.9583 23.25Z" fill="#E6E8E6"/>

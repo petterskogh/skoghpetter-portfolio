@@ -11,7 +11,7 @@ export const SliderButton: React.FC<Props> = ({onClick, value}) => {
   const [selected, setSelected] = useState<boolean>(value);
 
   const styleColor = useSpring({
-    backgroundColor: selected ? 'rgb(0, 200, 250)' : 'rgb(175, 175, 175)'
+    backgroundColor: selected ? 'rgb(0, 150, 250)' : 'rgb(175, 175, 175)'
   })
 
   const stylePosition = useSpring({
