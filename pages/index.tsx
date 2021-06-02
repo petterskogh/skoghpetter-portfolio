@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSpring, animated, update } from 'react-spring';
+import { NextPage } from 'next'
 
 import { StartScreen } from '../components/startscreen/startscreen-view';
 import { Contact } from '../components/contact/contact-view';
@@ -8,7 +9,7 @@ import useWindowSize from '../utilities/useWindowSize';
 
 import { useResizeDetector } from 'react-resize-detector';
 
-const Home = () => {
+const Home: NextPage = () => {
   
   const { width, height, ref } = useResizeDetector();
   const size = useWindowSize();
