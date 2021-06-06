@@ -23,7 +23,7 @@ const Home: NextPage = () => {
   })
   
   const styleMobileViewBackground = useSpring({
-    backgroundImage: `linear-gradient(to bottom right, ${mobileVersion ? '#1d9732' :  '#6d28d9'}, ${mobileVersion ? '#25dd69' :  '#b45309'})`,
+    backgroundImage: `linear-gradient(to bottom right, ${mobileVersion ? '#21a537' :  '#6d28d9'}, ${mobileVersion ? '#20cf4c' :  '#b45309'})`,
   })
 
   useEffect(() => {
