@@ -1,7 +1,24 @@
 /* purgecss start ignore */
 @tailwind base;
 @tailwind components;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
 /* purgecss end ignore */
 @tailwind utilities;
 
-@import './globals.css';
