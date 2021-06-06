@@ -32,7 +32,7 @@ export const Contact: React.FC<Props> = ({landscape, setScroll}) => {
         <div className="mb-3 w-full">
           <ContactClipboard>+46739718019</ContactClipboard>
         </div>
-        <div className="text-pwhite">[ <a className="hover:underline" href="https://www.linkedin.com/in/petter-skogh-6a7620178" target="_blank">LinkedIn</a> ]</div>
+        <div className="text-pwhite">[ <a className="hover:underline" href="https://www.linkedin.com/in/skoghpetter" target="_blank">LinkedIn</a> ]</div>
       </div>
       
 
