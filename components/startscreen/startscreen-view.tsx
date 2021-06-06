@@ -28,6 +28,7 @@ export const StartScreen: React.FC<Props> = ({landscape, scroll, setScroll}) => 
     let dropPosition = 0;
     if(!down && velocity > 0.2 && yDelta < 0) {
       dropPosition = -(window.innerHeight) - 200;
+      setScroll(-(window.innerHeight) - 200);
     }
     apiY.start({y: down && yDelta < 0 ? yDelta : dropPosition});
     apiBR.start({borderRadius: (down && yDelta < 0) ? 40 : 0});

@@ -65,19 +65,16 @@ const Home: NextPage = () => {
           onWheel={event => handleScroll(event)}
         >
           <StartScreen landscape={landscape} scroll={scroll} setScroll={setScroll} />
-          <Contact landscape={landscape} />
+          <Contact landscape={landscape} setScroll={setScroll} />
         </animated.div>
         {size.width > 768 ? 
           <animated.div className="fixed top-4 right-4 text-pwhite flex items-center px-6 py-4 rounded-full" 
-            //style={{backgroundColor: 'rgba(0, 0, 0, .15)', backdropFilter: 'blur(5px)'}}
             style={{...styleMobileViewBackground}}
           > 
             <p className="mr-3">Mobile view:</p>
             <SliderButton onClick={handleSliderClick} value={mobileVersion} />
           </animated.div>
         : null}
-        
-        
       </div>
     </>
   )
