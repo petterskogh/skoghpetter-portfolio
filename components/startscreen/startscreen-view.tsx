@@ -4,13 +4,14 @@ import { useDrag } from 'react-use-gesture'
 
 type Props = {
   landscape: boolean
+  height: number
   scroll: number
   setScroll: React.Dispatch<React.SetStateAction<number>>
 }
 
 const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
-export const StartScreen: React.FC<Props> = ({landscape, scroll, setScroll}) => {
+export const StartScreen: React.FC<Props> = ({landscape, height, scroll, setScroll}) => {
 
   const styleFadeIn = useSpring({ from: {opacity: 0}, to: {opacity: 1}, config: { duration: 500 }  })
   const styleFromLeft = useSpring({from: { marginLeft: '-100vw' }, to: { marginLeft: '0' }})
@@ -51,7 +52,7 @@ export const StartScreen: React.FC<Props> = ({landscape, scroll, setScroll}) => 
       style={{y, touchAction: 'pan-up', borderRadius, width: 'inherit'}}
     >
 
-      <div className={`h-full flex ${!landscape ? 'flex-col w-full' : 'flex-row-reverse w-2/3'} justify-center items-center`}>
+      <div className={`h-full flex ${!landscape ? 'flex-col w-full' : 'flex-row-reverse w-2/3'} ${!landscape && height < 580 ? 'justify-start' : 'justify-center'} items-center`}>
         <animated.img src={prefix + "/assets/images/Me.png"} alt="Petter Skogh as a 3D character" className={`${landscape ? 'w-3/6' : 'w-5/6'}`} style={{...styleFadeIn}}></animated.img>
         <animated.div className="flex flex-col items-center" style={{...styleFadeIn}}>
           <div className={`font-raleway font-bold ${landscape ? 'text-7xl' : 'text-6xl'} text-pwhite mb-4`}>

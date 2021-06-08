@@ -18,8 +18,8 @@ const Home: NextPage = () => {
   const [scroll, setScroll] = useState<number>(0);
 
   const sizeAnim = useSpring({
-    width: mobileVersion ? (size.height > 800 ? 420 : (size.height * 0.85 * 0.6)) : size.width, 
-    height: mobileVersion ? (size.height > 800 ? 800 : (size.height * 0.85)) : size.height,
+    width: mobileVersion ? 380 : size.width, 
+    height: mobileVersion ? (size.height > 760 ? 760 : (size.height * 0.85)) : size.height,
   })
   
   const styleMobileViewBackground = useSpring({
@@ -64,7 +64,7 @@ const Home: NextPage = () => {
           ref={ref}
           onWheel={event => handleScroll(event)}
         >
-          <StartScreen landscape={landscape} scroll={scroll} setScroll={setScroll} />
+          <StartScreen landscape={landscape} height={height} scroll={scroll} setScroll={setScroll} />
           <Contact landscape={landscape} setScroll={setScroll} />
         </animated.div>
         {size.width > 768 ? 
