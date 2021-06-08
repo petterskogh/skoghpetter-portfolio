@@ -18,8 +18,8 @@ const Home: NextPage = () => {
   const [scroll, setScroll] = useState<number>(0);
 
   const sizeAnim = useSpring({
-    width: mobileVersion ? 380 : size.width, 
-    height: mobileVersion ? '85%' : '100%',
+    width: mobileVersion ? (size.height > 800 ? 420 : (size.height * 0.85 * 0.6)) : size.width, 
+    height: mobileVersion ? (size.height > 800 ? 800 : (size.height * 0.85)) : size.height,
   })
   
   const styleMobileViewBackground = useSpring({
