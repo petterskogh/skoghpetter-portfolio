@@ -17,10 +17,17 @@ export const StartScreen: React.FC<Props> = ({landscape, height, scroll, setScro
   const styleFromLeft = useSpring({from: { marginLeft: '-100vw' }, to: { marginLeft: '0' }})
   const styleFromRight = useSpring({from: { marginRight: '-100vw' }, to: { marginRight: '0' }})
   const [flipFade, setFlipFade] = useState(false)
-  const styleFadeInAndOut = useSpring({
+  /*const styleFadeInAndOut = useSpring({
     from: { opacity: 0.6 },
     to: { opacity: 1 },
     reset: true, reverse: flipFade, config: { duration: 2000 }, onRest: () => setFlipFade(!flipFade),
+  })*/
+
+  const [bounce, setBounce] = useState<boolean>(false);
+  const styleBounce = useSpring({
+    scale: bounce ? 1.1 : 1,
+    config: { duration: 150 },
+    onRest: bounce ? () => setBounce(false) : null,
   })
 
   const [{ y }, apiY] = useSpring(() => ({ y: 0 }))
@@ -53,7 +60,18 @@ export const StartScreen: React.FC<Props> = ({landscape, height, scroll, setScro
     >
 
       <div className={`h-full flex ${!landscape ? 'flex-col w-full' : 'flex-row-reverse w-2/3'} ${!landscape && height < 580 ? 'justify-start' : 'justify-center'} items-center`}>
-        <animated.img src={prefix + "/assets/images/Me.png"} alt="Petter Skogh as a 3D character" className={`${landscape ? 'w-3/6' : 'w-5/6'}`} style={{...styleFadeIn}}></animated.img>
+        {/*<animated.img src={prefix + "/assets/images/Me.png"} alt="Petter Skogh as a 3D character" className={`${landscape ? 'w-3/6' : 'w-5/6'}`} style={{...styleFadeIn}}></animated.img>*/}
+        <div className={`flex justify-center items-center ${landscape ? 'w-3/6' : 'w-5/6'}`} >
+          <animated.img onClick={() => setBounce(true)} src={prefix + "/assets/images/Me.png"} alt="Petter Skogh as a 3D character" className="w-full" 
+          style={{...styleFadeIn, ...styleBounce,
+            /*transform: x
+            .to({
+              range: [0, 1],
+              output: [1, 1.05]
+            })
+            .to(x => `scale(${x})`)*/
+          }} />
+        </div>
         <animated.div className="flex flex-col items-center" style={{...styleFadeIn}}>
           <div className={`font-raleway font-bold ${landscape ? 'text-7xl' : 'text-6xl'} text-pwhite mb-4`}>
             <animated.h1 className="font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-pwhite via-pwhite" style={{...styleFromLeft}}>SKOGH</animated.h1>
@@ -64,7 +82,7 @@ export const StartScreen: React.FC<Props> = ({landscape, height, scroll, setScro
       </div>
 
       <div className="absolute bottom-2 flex flex-col text-pwhite">
-        <animated.svg className="h-12 cursor-pointer" onClick={scrollAway} style={{...styleFadeIn, ...styleFadeInAndOut}} viewBox="0 0 29 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <animated.svg className="h-12 cursor-pointer" onClick={scrollAway} style={{...styleFadeIn, /*...styleFadeInAndOut*/}} viewBox="0 0 29 39" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0)" filter="url(#filter0_d)">
           <path d="M22.9583 23.25V16.5L14.5 24L6.04166 16.5V23.25L14.5 30.75L22.9583 23.25Z" fill="#E6E8E6"/>
           <path d="M22.9583 12.75V6L14.5 13.5L6.04166 6V12.75L14.5 20.25L22.9583 12.75Z" fill="#E6E8E6"/>
