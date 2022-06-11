@@ -21,16 +21,13 @@ export const Contact: React.FC<Props> = ({landscape, setScroll}) => {
     style={{touchAction: 'pan-down'}}>
       
       <div className={`flex flex-col text-xl text-pwhite ${landscape ? 'w-1/3 mt-0' : 'w-5/6 mt-8'}`}>
-        <p className="mb-4" >Hi! My name is Petter Skogh. I'm a web developer and consultant at XLENT in Umeå, Sweden.  &#x1F4BB; I'm also an MSCE in Interaction and Design. &#x1F393;</p>
+        <p className="mb-4" >Hi! My name is Petter Skogh. I'm a web developer and consultant at XLENT in Umeå, Sweden.  &#x1F4BB;</p>
         <p>Contact me if you want to know more or maybe talk over a virtual cup of coffee! ☕</p>
       </div>
       
       <div className={`flex flex-col items-center text-lg ${landscape ? 'w-1/3 mt-0 px-10' : 'w-5/6 mt-8 px-0'}`}>
         <div className="mb-3 w-full">
           <ContactClipboard>skoghpetter@gmail.com</ContactClipboard>
-        </div>
-        <div className="mb-3 w-full">
-          <ContactClipboard>+46739718019</ContactClipboard>
         </div>
         <div className="text-pwhite mb-3">[ <a className="hover:underline" href="https://www.linkedin.com/in/skoghpetter" target="_blank">LinkedIn</a> ]</div>
       </div>
